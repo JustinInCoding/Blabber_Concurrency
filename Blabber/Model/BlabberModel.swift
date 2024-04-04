@@ -69,6 +69,26 @@ class BlabberModel: ObservableObject {
 				return nil
 			}
 		}
+		
+		// TODO: Xcode 15 using swift6 not supporting using countdown in the scheduledTimer closure.
+//		let counter = AsyncStream<String> { continuation in
+//			var countdown = 3
+//			Timer.scheduledTimer(
+//				withTimeInterval: 1.0,
+//				repeats: true
+//			) { timer in
+//					guard countdown > 0 else {
+//						timer.invalidate()
+//						continuation.yield(with: .success("🎉 " + message))
+////						continuation.finish()
+//						return
+//					}
+//
+//					continuation.yield("\(countdown)...")
+//					countdown -= 1
+//			}
+//		}
+		
 		for await countdownMessage in counter {
 			try await say(countdownMessage)
 		}
